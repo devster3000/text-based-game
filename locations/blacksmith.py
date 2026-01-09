@@ -1,4 +1,4 @@
-from game.items import *
+from game.inventory import *
 from game.player import *
 
 def blacksmith():

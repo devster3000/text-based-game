@@ -1,5 +1,5 @@
 def items():
-    return {
+    inventorydict = {
         # Consumables
 
         "apple" : {
@@ -125,3 +125,5 @@ def items():
             "health" : 10,
         }
     }
+
+    return inventorydict

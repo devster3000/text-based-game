@@ -1,12 +1,14 @@
 from game.player import *
 from game.locations import *
-from game.items import *
+from game.inventory import *
 from game.skills import *
 import time as t
 
 
 def main():
     skilldict = skills()
+    inventorydict = items()
+
     print("Hello and also welcome to this game.\n")
 
 
@@ -65,6 +67,11 @@ def main():
     t.sleep(2)
     print("\n")
     skill_picker()
+
+
+
+    ## Combat
+
 
 
 
