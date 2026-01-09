@@ -1,8 +1,9 @@
 def items():
-    items = {
+    return {
         # Consumables
 
         "apple" : {
+            "quantity" : 0,
             "name" : "Apple",
             "description" : "Food source.",
             "type" : "consumable",
@@ -10,6 +11,7 @@ def items():
         },
 
         "bread" : {
+            "quantity" : 0,
             "name" : "Bread",
             "description" : "Food source.",
             "type" : "consumable",
@@ -17,6 +19,7 @@ def items():
         },
 
         "strawberry" : {
+            "quantity" : 0,
             "name" : "Strawberry",
             "description" : "Food source",
             "type" : "consumable",
@@ -24,6 +27,7 @@ def items():
         },
 
         "water" : {
+            "quantity" : 0,
             "name" : "Water",
             "description" : "Drink source",
             "type" : "consumable",
@@ -31,6 +35,7 @@ def items():
         },
 
         "beer" : {
+            "quantity" : 0,
             "name" : "Beer",
             "description" : "Drink source",
             "type" : "consumable",
@@ -120,5 +125,3 @@ def items():
             "health" : 10,
         }
     }
-
-    return items

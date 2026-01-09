@@ -1,7 +1,5 @@
 def locations():
-    locations = {
-
-
+    return {
         # Village Locations
 
         "village" : {
