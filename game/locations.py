@@ -73,3 +73,5 @@ def locations():
             "enemies" : True,
         },
     }
+
+    return locationdict

@@ -1,8 +1,19 @@
+import time as t
+
+# Function imports
+
+from game.entities import *
 from game.player import *
 from game.locations import *
 from game.inventory import *
 from game.skills import *
-import time as t
+from game.mechanics.combat import *
+from game.map import *
+
+# Location Imports
+from locations.arena import *
+from locations.house import *
+from locations.blacksmith import *
 
 
 def main():
@@ -58,6 +69,8 @@ def main():
                 case "h":
                     print("### CURRENT XP LEVELS ###")
                     skill_display()
+                case "skip":
+                    total_xp = 0
 
     print("Loading...")
     t.sleep(2)
@@ -69,11 +82,50 @@ def main():
     skill_picker()
 
 
+    ### === MAP SYSTEM ===
 
-    ## Combat
+    p = player("Gordon Freeman")
+    inventory = items()
+    start_pos = [1, 4]
+
+    # --- Map loop ---
+    while True:
+        player_pos, location = map_system(start_pos)
+
+        # --- Location logic ---
+        if location == "house":
+            inventory = house(p)
 
 
+        elif location == "arena":
+            print("You arrive at the arena. Combat goes here.")
+            all_entities = entities()
+            enemy_to_fight = {
+                "name": all_entities["Guards"]["name"],
+                "health": all_entities["Guards"]["health"],
+                "damage": all_entities["Guards"]["damage"]
+            }
+            combat(p, enemy_to_fight)
 
+
+        elif location == "blacksmith":
+            inventory = blacksmith(inventory)
+
+
+        elif location == "tavern":
+            print("You arrive at the tavern. Interactions go here.")
+
+
+        elif location == "castle":
+            print("You arrive at the castle.")
+
+
+        elif location is None:
+            print("You quit the map.")
+            break
+
+        # Update starting position for next map run
+        start_pos = player_pos
 
 
 main()

@@ -1,23 +1,29 @@
 def entities():
-    entitiesdict = {
+    return {
         ## Enemies
         "Guards" : {
             "name" : "Guards",
             "health" : 120,
             "damage" : 7,
-            "items" : ["sword"]
+            "items" : ["sword"],
+            "skills" : ["combat"],
+            "alive" : True,
         },
         "Goblin" : {
             "name" : "Goblin",
             "health" : 50,
             "damage" : 5,
-            "items" : ["coins"]
+            "items" : ["coins"],
+            "skills" : ["drunk"],
+            "alive" : True,
         },
         "Spider" : {
             "name" : "Spider",
             "health" : 140,
             "damage" : 17,
-            "items" : 0
+            "items" : 0,
+            "skills" : ["combat"],
+            "alive" : True,
         },
 
         ## Friendlies
@@ -25,24 +31,32 @@ def entities():
             "name" : "Drunk",
             "health" : 50,
             "damage" : 2,
-            "items" : ["coins"]
+            "items" : ["coins"],
+            "skills" : ["drunk"],
+            "alive" : True,
         },
         "Storeperson" : {
             "name" : "Storeperson",
             "health" : 50,
             "damage" : 300,
-            "items" : ["coins", "bread"]
+            "items" : ["coins", "bread"],
+            "skills" : ["speed"],
+            "alive" : True,
         },
         "Blacksmith" : {
             "name" : "Blacksmith",
             "health" : 50,
             "damage" : 300,
-            "items" : ["coins", "sword", "mace", "helmet", "chestplate", "leggings", "boots"]
+            "items" : ["coins", "sword", "mace", "helmet", "chestplate", "leggings", "boots"],
+            "skills" : ["speed"],
+            "alive" : True,
         },
         "Bartender" : {
             "name" : "Bartender",
             "health" : 50,
             "damage" : 300,
-            "items" : ["coins", "beer"]
+            "items" : ["coins", "beer"],
+            "skills" : ["speed"],
+            "alive" : True,
         }
     }

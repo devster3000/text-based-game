@@ -1,52 +1,57 @@
-from game.inventory import *
-from game.player import *
+# blacksmith.py
+from game.inventory import items
+import time as t
 
-def blacksmith():
-    print("// Welcome to blacksmith store.\n")
-    input("// Have you things to upgrade (Y/n)\n")
-    if input("Y" or "y"):
-        print("Great. What would you like to upgrade?\n")
-        print(" // WEAPONS INVENTORY // \n\n")
-        print(items.get("weapons"))
-    #Printing Weapons inventory
-        if items["weapons"]["sword"]["quantity"] != 0:
-            print("Sword Quantity: ", items["weapons"]["sword"]["quantity"])
+def blacksmith(inv):
+
+    shop_items = {
+        "sword": 100,
+        "mace": 150,
+        "helmet": 50,
+        "chestplate": 80,
+        "leggings": 60,
+        "boots": 40
+    }
+
+    inventorydict = inv
+
+    print("\n// Welcome to the Blacksmith.")
+    print("You see all sorts of weapons and armour on display.\n")
+    t.sleep(1)
+
+    coins = inventorydict.get("coin", {"quantity": 0})["quantity"]
+
+    while True:
+        print(f"You currently have {coins} coins.\n")
+        print("Items available for purchase:")
+        for item, price in shop_items.items():
+            print(f"- {item.capitalize()} : {price} coins")
+
+        choice = input("\nType the item name to buy, or 'leave' to exit the blacksmith.\n>>>").lower()
+
+        if choice == "leave":
+            print("You leave the blacksmith.\n")
+            break
+
+        if choice not in shop_items:
+            print("Item not available. Try again.\n")
+            continue
+
+        price = shop_items[choice]
+
+        if coins < price:
+            print("Not enough coins!\n")
+            continue
+
+        # Add item to inventory
+        item_entry = inventorydict.get(choice)
+        if item_entry:
+            item_entry["quantity"] += 1
         else:
-            print("Sword Quantity: 0")
+            inventorydict[choice] = {"quantity": 1}  # fallback
 
-        if items["weapons"]["mace"]["quantity"] != 0:
-            print("Mace Quantity: ", items["weapons"]["mace"]["quantity"])
-        else:
-            print("Mace Quantity: 0")
+        coins -= price
+        inventorydict["coin"]["quantity"] = coins
+        print(f"You purchased a {choice.capitalize()}! You now have {coins} coins remaining.\n")
 
-    #Upgrading weapons
-    input("\nEnter item to upgrade: ")
-    if input("sword" or "Sword"):
-        print("Not implemented.")
-    elif input("mace" or "Mace"):
-        print("Not implemented.")
-
-    input("\n\nWould you also like to upgrade any armour pieces?: ")
-    if input("Y" or "y"):
-        print(" // ARMOUR INVENTORY // \n\n")
-        print(print(items.get("armour")))
-    #Printing Armour Inventory
-        if items["armour"]["helmet"]["quantity"] != 0:
-            print("Helmet Quantity: ", items["armour"]["helmet"]["quantity"])
-        else:
-            print("\nNo helmet available\n")
-
-        if items["armour"]["chestplate"]["quantity"] != 0:
-            print("Chestplate Quantity: ", items["armour"]["chestplate"]["quantity"])
-        else:
-            print("\nNo chestplate available\n")
-
-        if items["armour"]["leggings"]["quantity"] != 0:
-            print("Leggings Quantity: ", items["armour"]["leggings"]["quantity"])
-        else:
-            print("\nNo leggings available\n")
-
-        if items["armour"]["boots"]["quantity"] != 0:
-            print("Boots Quantity: ", items["armour"]["boots"]["quantity"])
-        else:
-            print("\nNo boots available\n")
+    return inventorydict
