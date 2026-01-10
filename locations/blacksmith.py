@@ -1,10 +1,12 @@
 # blacksmith.py
-from game.inventory import items
 import time as t
 
-def blacksmith(inv):
+def blacksmith(inventory):
+    print("\n// Blacksmith")
+    print("The forge is blazing. The blacksmith eyes you up.\n")
+    t.sleep(1)
 
-    shop_items = {
+    shop_prices = {
         "sword": 100,
         "mace": 150,
         "helmet": 50,
@@ -13,45 +15,124 @@ def blacksmith(inv):
         "boots": 40
     }
 
-    inventorydict = inv
+    def get_coins():
+        return inventory["coin"]["quantity"]
 
-    print("\n// Welcome to the Blacksmith.")
-    print("You see all sorts of weapons and armour on display.\n")
-    t.sleep(1)
+    def spend_coins(amount):
+        inventory["coin"]["quantity"] -= amount
 
-    coins = inventorydict.get("coin", {"quantity": 0})["quantity"]
+    def show_inventory():
+        print("\nYour inventory:")
+        for key, data in inventory.items():
+            if data["quantity"] > 0:
+                print(f"- {data['name']} x{data['quantity']}")
+        print()
+
+    def buy_item():
+        print("\nItems for sale:")
+        for item, price in shop_prices.items():
+            print(f"{item} - {price} coins")
+
+        choice = input("Buy what? (or 'back'): ").lower()
+        if choice == "back":
+            return
+
+        if choice not in shop_prices:
+            print("That’s not sold here.")
+            return
+
+        price = shop_prices[choice]
+        if get_coins() < price:
+            print("You’re broke.")
+            return
+
+        inventory[choice]["quantity"] += 1
+        spend_coins(price)
+        print(f"You bought a {inventory[choice]['name']}.")
+
+    def repair_item():
+        repairables = {
+            k: v for k, v in inventory.items()
+            if v.get("health") and v["quantity"] > 0
+        }
+
+        if not repairables:
+            print("Nothing to repair.")
+            return
+
+        print("\nRepairable items:")
+        for item in repairables:
+            print(item)
+
+        choice = input("Repair what? (or 'back'): ").lower()
+        if choice == "back":
+            return
+
+        if choice not in repairables:
+            print("Can’t repair that.")
+            return
+
+        cost = 20
+        if get_coins() < cost:
+            print("Not enough coins.")
+            return
+
+        inventory[choice]["health"] += 10
+        spend_coins(cost)
+        print(f"{inventory[choice]['name']} repaired (+10 health).")
+
+    def upgrade_item():
+        upgradable = {
+            k: v for k, v in inventory.items()
+            if v["type"] in ["weapon", "armour"] and v["quantity"] > 0
+        }
+
+        if not upgradable:
+            print("Nothing to upgrade.")
+            return
+
+        print("\nUpgradeable items:")
+        for item in upgradable:
+            print(item)
+
+        choice = input("Upgrade what? (or 'back'): ").lower()
+        if choice == "back":
+            return
+
+        if choice not in upgradable:
+            print("Invalid choice.")
+            return
+
+        cost = 50
+        if get_coins() < cost:
+            print("You can’t afford that.")
+            return
+
+        if inventory[choice]["type"] == "weapon":
+            inventory[choice]["damage"] += 5
+            print(f"{inventory[choice]['name']} damage increased.")
+        else:
+            inventory[choice]["health"] += 15
+            print(f"{inventory[choice]['name']} durability increased.")
+
+        spend_coins(cost)
 
     while True:
-        print(f"You currently have {coins} coins.\n")
-        print("Items available for purchase:")
-        for item, price in shop_items.items():
-            print(f"- {item.capitalize()} : {price} coins")
+        print(f"\nCoins: {get_coins()}")
+        choice = input("1. Buy\n2, Repair\n3. Upgrade\n4. View Inventory\n5. Leave\n>>>")
 
-        choice = input("\nType the item name to buy, or 'leave' to exit the blacksmith.\n>>>").lower()
-
-        if choice == "leave":
-            print("You leave the blacksmith.\n")
+        if choice == "1":
+            buy_item()
+        elif choice == "2":
+            repair_item()
+        elif choice == "3":
+            upgrade_item()
+        elif choice == "4":
+            show_inventory()
+        elif choice == "5":
+            print("You leave the blacksmith.")
             break
-
-        if choice not in shop_items:
-            print("Item not available. Try again.\n")
-            continue
-
-        price = shop_items[choice]
-
-        if coins < price:
-            print("Not enough coins!\n")
-            continue
-
-        # Add item to inventory
-        item_entry = inventorydict.get(choice)
-        if item_entry:
-            item_entry["quantity"] += 1
         else:
-            inventorydict[choice] = {"quantity": 1}  # fallback
+            print("Pick a real option.")
 
-        coins -= price
-        inventorydict["coin"]["quantity"] = coins
-        print(f"You purchased a {choice.capitalize()}! You now have {coins} coins remaining.\n")
-
-    return inventorydict
+    return inventory

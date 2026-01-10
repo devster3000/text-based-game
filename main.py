@@ -14,6 +14,8 @@ from game.map import *
 from locations.arena import *
 from locations.house import *
 from locations.blacksmith import *
+from locations.tavern import *
+from locations.field import *
 
 
 def main():
@@ -27,7 +29,7 @@ def main():
 
     name = input("What is your name? \n>>>")
     p = player(name)
-    print("Hello, ",p["name"])
+    print("Hello,",p["name"])
 
 
     ### SKILL GIVING ###
@@ -88,11 +90,11 @@ def main():
     inventory = items()
     start_pos = [1, 4]
 
-    # --- Map loop ---
     while True:
         player_pos, location = map_system(start_pos)
 
-        # --- Location logic ---
+
+        ## LOCATIONS
         if location == "house":
             inventory = house(p)
 
@@ -113,8 +115,7 @@ def main():
 
 
         elif location == "tavern":
-            print("You arrive at the tavern. Interactions go here.")
-
+            p, inventory = tavern(p, inventory, combat)
 
         elif location == "castle":
             print("You arrive at the castle.")
@@ -124,7 +125,6 @@ def main():
             print("You quit the map.")
             break
 
-        # Update starting position for next map run
         start_pos = player_pos
 
 

@@ -46,7 +46,7 @@ def items():
         # Misc
 
         "coin" : {
-            "quantity" : 0,
+            "quantity" : 5000,
             "name" : "Coin",
             "description" : "Currency and bribing",
             "type" : "misc",
