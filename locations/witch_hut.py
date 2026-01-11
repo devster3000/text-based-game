@@ -22,6 +22,11 @@ def witch_hut(player, inventory, combat_func):
 
             print("\nThe witch screeches and attacks!")
             t.sleep(1)
+            enemy_to_fight = {
+                "name": all_entities["Witch"]["name"],
+                "health": all_entities["Witch"]["health"],
+                "damage": all_entities["Witch"]["damage"]
+            }
             combat_func(player, witch)
 
             if not witch["alive"]:

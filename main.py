@@ -137,23 +137,23 @@ def main():
 
 
         elif location == "mines":
-            p, inventory = mines(player, inventory)
+            p, inventory = mines(p, inventory)
 
 
         elif location == "market":
-            p, inventory = market(player, inventory)
+            p, inventory = market(p, inventory)
 
 
         elif location == "witch_hut":
-            p, inventory = witch_hut(player, inventory, combat)
+            p, inventory = witch_hut(p, inventory, combat)
 
 
         elif location == "well":
-            p, inventory = well(player, inventory)
+            p, inventory = well(p, inventory)
 
 
         elif location == "fishing_pier":
-            p, inventory = fishing_pier(player, inventory)
+            p, inventory = fishing_pier(p, inventory)
 
 
         elif location is None:
