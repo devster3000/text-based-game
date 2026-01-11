@@ -25,6 +25,15 @@ def entities():
             "skills" : ["combat"],
             "alive" : True,
         },
+        "Witch" : {
+            "name" : "Witch",
+            "health" : 200,
+            "damage" : 10,
+            "items" : 0,
+            "skills" : False,
+            "alive" : True,
+        },
+
 
         ## Friendlies
         "Drunk" : {

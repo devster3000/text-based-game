@@ -7,7 +7,7 @@ from netaddr import mac_pgsql
 from game.inventory import *
 def house(player):
 
-    inventory = items()  # get the inventory dictionary
+    inventory = items()
 
     print(f"\nWelcome home, {player['name']}!")
     t.sleep(1)
@@ -22,7 +22,7 @@ def house(player):
         print("You open the chest...\n")
         t.sleep(1)
 
-        # --- Coins ---
+        #  Coins
         chest_coins = r.randint(1, 5)
         choice = input(f"You found {chest_coins} coins. Take them? (Y/n) ").lower()
         if choice == "y":
@@ -31,9 +31,9 @@ def house(player):
         else:
             print("You leave the coins behind.\n")
 
-        # --- Weapon ---
-        weapons_list = ["sword", "mace"]  # only keys from inventory
-        weapon_found = r.choice(weapons_list + [None])  # chance to find nothing
+        #  Weapon
+        weapons_list = ["sword", "mace"]
+        weapon_found = r.choice(weapons_list + [None])
         if weapon_found:
             choice = input(f"You found a {inventory[weapon_found]['name']}. Take it? (Y/n) ").lower()
             if choice == "y":
@@ -44,7 +44,7 @@ def house(player):
         else:
             print("No weapon found in the chest.\n")
 
-        # --- Consumables ---
+        # Consumables
         consumables_list = ["strawberry", "apple", "bread"]
         chest_food = r.choice(consumables_list)
         quantity = r.randint(1, 4)

@@ -17,6 +17,11 @@ from locations.blacksmith import *
 from locations.tavern import *
 from locations.field import *
 from locations.castle import*
+from locations.mines import *
+from locations.market import *
+from locations.well import *
+from locations.fishing_pier import *
+from locations.witch_hut import *
 
 
 def main():
@@ -87,9 +92,9 @@ def main():
 
     ### === MAP SYSTEM ===
 
-    p = player("Gordon Freeman")
     inventory = items()
     entities_dict = entities()
+    start_pos = [1, 4]
 
     while True:
         player_pos, location = map_system(start_pos)
@@ -120,17 +125,35 @@ def main():
 
 
         elif location == "castle":
-            p, inv = castle(p, inv, entities_dict, combat)
+            p, inventory = castle(p, inventory, entities_dict, combat)
 
 
         elif location == "flower_field":
-            p, inv = flower_field(p, inv)
+            p, inventory = flower_field(p, inventory)
 
 
         elif location == "strawberry_field":
-            p, inv = strawberry_field(p, inv, skilldict)
+            p, inventory = strawberry_field(p, inventory, skilldict)
 
 
+        elif location == "mines":
+            p, inventory = mines(player, inventory)
+
+
+        elif location == "market":
+            p, inventory = market(player, inventory)
+
+
+        elif location == "witch_hut":
+            p, inventory = witch_hut(player, inventory, combat)
+
+
+        elif location == "well":
+            p, inventory = well(player, inventory)
+
+
+        elif location == "fishing_pier":
+            p, inventory = fishing_pier(player, inventory)
 
 
         elif location is None:
