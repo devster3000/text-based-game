@@ -117,8 +117,7 @@ def main():
 
 
         elif location == "blacksmith":
-            inventory = blacksmith(inventory)
-
+            p, inventory = blacksmith(p, inventory)
 
         elif location == "tavern":
             p, inventory = tavern(p, inventory, combat)

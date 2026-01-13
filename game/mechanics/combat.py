@@ -1,18 +1,34 @@
 from game.entities import *
 from game.player import *
 
+def apply_damage(player, damage):
+    DAMAGE_REDUCTION = 0.25  # 25% reduction when armour exists
+
+    if player["armour_health"] > 0:
+        reduced_damage = int(damage * (1 - DAMAGE_REDUCTION))
+
+        absorbed = min(player["armour_health"], reduced_damage)
+        player["armour_health"] -= absorbed
+        remaining = reduced_damage - absorbed
+
+        print(f"Armour absorbed {absorbed} damage!")
+
+        if remaining > 0:
+            player["health"] -= remaining
+            print(f"You take {remaining} HP damage!")
+    else:
+        player["health"] -= damage
+        print(f"You take {damage} HP damage!")
+
+
 def combat(player, enemy):
 
     print(f"\nCombat Start! You are fighting a {enemy['name']}\n")
 
     while enemy["health"] > 0 and player["health"] > 0:
         # --- Display status ---
-        print(f"Your HP: {player['health']} | {enemy['name']} HP: {enemy['health']}")
-        print("Choose your action:")
-        print("1: Attack")
-        print("2: Eat food (+20 HP)")
-
-        choice = input(">>> ")
+        print(f"HP: {player['health']} | Armour: {player['armour_health']} | "f"{enemy['name']} HP: {enemy['health']}","\nChoose your action:\n1. Attack\n2. Eat food")
+        choice = input(">>>")
 
         # --- Player's turn ---
         if choice == "1":
@@ -32,7 +48,7 @@ def combat(player, enemy):
             break
 
         # --- Enemy's turn ---
-        player["health"] -= enemy["damage"]
+        apply_damage(player, enemy["damage"])
         print(f"{enemy['name']} hits you for {enemy['damage']} damage. Your HP is now {player['health']}.\n")
 
         if player["health"] <= 0:
