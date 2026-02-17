@@ -1,1 +1,1 @@
-free-movement in a 2d map. there is strawberry picking.
+Free movement on a 2D map
