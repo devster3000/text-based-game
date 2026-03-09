@@ -2,8 +2,6 @@ import random as r
 import time as t
 import sys
 
-from netaddr import mac_pgsql
-
 from game.inventory import *
 def house(player):
 
@@ -16,7 +14,7 @@ def house(player):
     def bed():
         print("You rest on your bed. Feeling refreshed!\n")
         t.sleep(1)
-        return bed()
+        break
 
     def chest():
         print("You open the chest...\n")
@@ -70,7 +68,6 @@ def house(player):
         match action:
             case "1":
                 bed()
-                break
             case "2":
                 chest()
             case "3":
