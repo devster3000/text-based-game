@@ -1,0 +1,41 @@
+{
+  "Home": {
+    "status": "safehouse",
+    "rest": "true"
+  },
+
+  "Garden": {
+    "status": "neutral",
+    "rest": "false"
+  },
+
+  "Store": {
+    "status": "neutral",
+    "rest": "false"
+  },
+
+  "Pub": {
+    "status": "safehouse",
+    "rest": "true"
+  },
+
+  "Arena": {
+    "status": "unsafe",
+    "rest": "false"
+  },
+
+  "Forest": {
+    "status": "unsafe",
+    "rest": "false"
+  },
+
+  "Field": {
+    "status": "safe",
+    "rest": "true"
+  },
+
+  "Witch Hut": {
+    "status": "danger",
+    "rest": "true"
+  }
+}

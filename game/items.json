@@ -1,0 +1,37 @@
+{
+  "Bread": {
+    "type": "food",
+    "consumable": "true",
+    "points": 5
+  },
+
+  "Mouldy Bread": {
+    "type": "food",
+    "consumable": "true",
+    "points": -5
+  },
+
+  "Apple": {
+    "type": "food",
+    "consumable": "true",
+    "points": 7
+  },
+
+  "Beer": {
+    "type": "drink",
+    "consumable": "true",
+    "points": 15
+  },
+
+  "Water": {
+    "type": "drink",
+    "consumable": "true",
+    "points": 7
+  },
+
+  "Sea Water": {
+    "type": "drink",
+    "conusmable": "true",
+    "points": -3
+  }
+}
