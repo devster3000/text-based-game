@@ -2,7 +2,7 @@ import random as r
 import time as t
 import sys
 
-from game.inventory import *
+from legacy.game.inventory import *
 def house(player):
 
     inventory = items()

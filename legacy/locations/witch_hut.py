@@ -1,6 +1,6 @@
 # witch_hut.py
 import time as t
-from game.entities import entities
+from legacy.game.entities import entities
 
 def witch_hut(player, inventory, combat_func):
     print("\n// Witch Hut\nA crooked hut stands deep in the woods. Something watches you.")

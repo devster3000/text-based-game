@@ -1,5 +1,5 @@
 import time as t
-from game.entities import entities
+from legacy.game.entities import entities
 
 def tavern(player, inventory, combat_func):
     print("\n// Tavern")

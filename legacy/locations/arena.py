@@ -1,5 +1,5 @@
-from game.entities import *
-from game.mechanics.combat import *
+from legacy.game.entities import *
+from legacy.game.mechanics.combat import *
 
 def arena_scene(player):
     print("\nWelcome to the Arena! Guards are here to fight you!\n")

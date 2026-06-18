@@ -1,5 +1,5 @@
-from game.entities import *
-from game.player import *
+from legacy.game.entities import *
+from legacy.game.player import *
 
 def apply_damage(player, damage):
     DAMAGE_REDUCTION = 0.25  # 25% reduction when armour exists

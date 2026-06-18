@@ -1,4 +1,4 @@
-from game.locations import locations
+from legacy.game.locations import locations
 
 def map_system(start_pos):
     MAP_WIDTH = 10
